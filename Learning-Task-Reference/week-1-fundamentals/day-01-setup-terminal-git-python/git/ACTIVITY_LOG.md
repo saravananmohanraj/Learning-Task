@@ -93,3 +93,20 @@ To https://github.com/saravananmohanraj/Learning-Task.git
 8. git fetch
 
 -> We can get the changed code from the remote branch repostories but don't get merged into local branch.
+
+9. .gitignore
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>echo "__pycache__/" > .gitignore
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>echo ".venv/" >> .gitignore
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git add .gitignore
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git commit -m "Add .gitignore to exclude cache and venv"
+[day-01-setup-terminal-git-python d304db0] Add .gitignore to exclude cache and venv
+ 1 file changed, 2 insertions(+)
+ create mode 100644 .gitignore
+
+ -> Hidden configuration file and added Cconfiguration file and added __pycache__/ to block Python's temporary compiled bytecode from being tracked.
+ -> Appended .venv/ to block your local virtual environment, which contains thousands of packages specific only to our computer.
+ -> Permanently saved these exclusion rules into the project's history so they apply to everyone.
