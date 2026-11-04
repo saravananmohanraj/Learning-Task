@@ -110,3 +110,192 @@ C:\Users\Orcon\Downloads\Learning-Task-Reference>git commit -m "Add .gitignore t
  -> Hidden configuration file and added Cconfiguration file and added __pycache__/ to block Python's temporary compiled bytecode from being tracked.
  -> Appended .venv/ to block your local virtual environment, which contains thousands of packages specific only to our computer.
  -> Permanently saved these exclusion rules into the project's history so they apply to everyone.
+
+10. git merge
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git switch branch-1
+Switched to branch 'branch-1'
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>echo "Second update" >> test.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git commit -am "Second update to base"
+[branch-1 3c72cfb] Second update to base
+ 1 file changed, 1 insertion(+)
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git switch test-merge
+Switched to branch 'test-merge'
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git merge branch-1
+Merge made by the 'ort' strategy.
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+Merge branch 'branch-1' into test-merge
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# Lines starting with '#' will be ignored, and an empty message aborts
+# the commit.
+~                                                                                                                    ~                                                                                                                       ~                                                                                                                                 .git/MERGE_MSG [unix] (21:53 04/11/2026)                                                                         
+1,1 All"~/Downloads/Learning-Task-Reference/.git/MERGE_MSG" [unix] 6L, 266B
+
+-> combine the branches ( of branch-1 into test-merge ) and create a new merge commit, preserving the split history.
+
+11. git rebase
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git switch test-rebase
+Already on 'test-rebase'
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>echo "Rebase work" > rebase.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git add rebase.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git commit -m "My rebase work"
+[test-rebase 0970edb] My rebase work
+ 1 file changed, 1 insertion(+)
+ create mode 100644 rebase.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference>git rebase branch-1
+Successfully rebased and updated refs/heads/test-rebase.
+
+-> rewrite the history by moving your new work to the very tip of the updated base, creating a straight line.
+
+12. git restore
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>echo "Mistake" > undo-test.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git add undo-test.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git commit -m "for restore command to run"
+[test-merge 9db63d4] for restore command to run
+ 1 file changed, 1 insertion(+)
+ create mode 100644 Learning-Task-Reference/week-1-fundamentals/day-01-setup-terminal-git-python/git/undo-test.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>echo "A terrible mistake" >> undo-test.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>type undo-test.txt
+"Mistake"
+"A terrible mistake"
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git restore undo-test.txt
+"Mistake"
+
+-> Uncommitted changes will revert to normal with tracked commits.
+
+13. git reset soft
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git reset --soft HEAD~1
+
+-> undo the commits, but keep the file.
+
+14. git reset hard
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git reset --hard HEAD~2
+HEAD is now at 73f80f7 Base commit
+
+-> Destroy our .gitignore and delete the file
+
+15. git revert
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>echo "Bad idea" > bad-file.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git add bad-file.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git commit -m "Bad commit"
+[test-merge cc3d18c] Bad commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 Learning-Task-Reference/week-1-fundamentals/day-01-setup-terminal-git-python/git/bad-file.txt
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference\week-1-fundamentals\day-01-setup-terminal-git-python\git>git revert HEAD --no-edit
+[test-merge 7a5678a] Revert "Bad commit"
+ Date: Wed Nov 4 22:40:09 2026 +0530
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 Learning-Task-Reference/week-1-fundamentals/day-01-setup-terminal-git-python/git/bad-file.txt 
+
+-> Safely creates a new commit that deletes bad-file.txt 
+
+16. git log
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference>git log
+commit ba2dbe8f9953f8960a00fcf2d1b78dc813e866d8 (HEAD -> day-01-setup-terminal-git-python)
+Author: Saravanan Srikanth <saravanan@saturam.com>
+Date:   Wed Nov 4 22:46:49 2026 +0530
+
+    Recreate .gitignore after hard reset
+
+commit 898c5c430a81b2582adc09d82ac453ce48542eea (origin/day-01-setup-terminal-git-python)
+Author: Saravanan Srikanth <saravanan@saturam.com>
+Date:   Wed Nov 4 22:18:06 2026 +0530
+
+    Added .gitignore configuration file
+
+commit d304db05c0e4c2f385518317866806986d537b90
+Author: Saravanan Srikanth <saravanan@saturam.com>
+Date:   Wed Nov 4 22:12:38 2026 +0530
+
+    Add .gitignore to exclude cache and venv
+
+commit 03ffead2059512a46757a89d00759eb56269a107
+Author: Saravanan Srikanth <saravanan@saturam.com>
+Date:   Wed Nov 4 13:24:18 2026 +0530
+
+    git commands executed part-1
+
+commit cd8ca590ff75253f82e3c7390a528c7bebbcecd3
+Author: Saravanan Srikanth <saravanan@saturam.com>
+Date:   Wed Nov 4 13:05:48 2026 +0530
+
+    About git & commands executed
+ ^X
+commit ba2dbe8f9953f8960a00fcf2d1b78dc813e866d8 (HEAD -> day-01-setup-terminal-git-python)
+Author: Saravanan Srikanth <saravanan@saturam.com>
+Date:   Wed Nov 4 22:46:49 2026 +0530
+
+-> It will give the commit logs.
+
+17. git log --online
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference>git log --graph
+* commit ba2dbe8f9953f8960a00fcf2d1b78dc813e866d8 (HEAD -> day-01-setup-terminal-git-python)
+| Author: Saravanan Srikanth <saravanan@saturam.com>
+| Date:   Wed Nov 4 22:46:49 2026 +0530
+|
+|     Recreate .gitignore after hard reset
+|
+* commit 898c5c430a81b2582adc09d82ac453ce48542eea (origin/day-01-setup-terminal-git-python)
+| Author: Saravanan Srikanth <saravanan@saturam.com>
+| Date:   Wed Nov 4 22:18:06 2026 +0530
+|
+|     Added .gitignore configuration file
+|
+* commit d304db05c0e4c2f385518317866806986d537b90
+| Author: Saravanan Srikanth <saravanan@saturam.com>
+| Date:   Wed Nov 4 22:12:38 2026 +0530
+|
+|     Add .gitignore to exclude cache and venv
+|
+* commit 03ffead2059512a46757a89d00759eb56269a107
+| Author: Saravanan Srikanth <saravanan@saturam.com>
+| Date:   Wed Nov 4 13:24:18 2026 +0530
+|
+|     git commands executed part-1
+|
+* commit cd8ca590ff75253f82e3c7390a528c7bebbcecd3
+| Author: Saravanan Srikanth <saravanan@saturam.com>
+| Date:   Wed Nov 4 13:05:48 2026 +0530
+|
+|     About git & commands executed
+
+-> It shows standard history with extra timeline in the left corner.
+
+18. git log --oneline --graph
+
+C:\Users\Orcon\Downloads\Learning-Task-Reference\Learning-Task-Reference>git log --oneline --graph
+* ba2dbe8 (HEAD -> day-01-setup-terminal-git-python) Recreate .gitignore after hard reset
+* 898c5c4 (origin/day-01-setup-terminal-git-python) Added .gitignore configuration file
+* d304db0 Add .gitignore to exclude cache and venv
+* 03ffead git commands executed part-1
+* cd8ca59 About git & commands executed
+* c311d29 (origin/main, origin/HEAD, main) Initial commit of repo
+
+-> Compresses the history and shrinks long commit ID to 7 characters, easy-to-read.
