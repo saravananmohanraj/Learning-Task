@@ -123,3 +123,17 @@ $ docker compose up -d
  ✔ Container compose-my-test-db-check-1  Started                                                                                                                       0.5s
  - Container compose-my-test-db-1        Starting                                                                                                                      0.5s
 Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint compose-my-test-db-1 (6c46c2d2864cb8b7858bbc0d40fd3d66f13826b974e95b1df2fc3d3408296ebb): Bind for 0.0.0.0:5533 failed: port is already allocated
+
+
+List of services, images and ports on deploy/compose.yaml
+
+| Service Name | Image | Host Port | Container Port |
+|---|---|---|---|
+| `postgres` | `agnohq/pgvector:18` | `5532` | `5432` |
+| `migrate` | `egpt-retail:dev` | *(None mapped)* | *(None mapped)* |
+| `warehouse-migrate` | `egpt-retail:dev` | *(None mapped)* | *(None mapped)* |
+| `api` | `egpt-retail:dev` | `7777` (or `EGPT_RETAIL_API_PORT`) | `7777` |
+| `consolidator` | `egpt-retail:dev` | *(None mapped)* | *(None mapped)* |
+| `neo4j` | `neo4j:5` | `7474`, `7687` | `7474`, `7687` |
+| `redis` | `redis:7-alpine` | `6379` | `6379` |
+| `minio` | `minio/minio:RELEASE.2025-09-07T16-13-09Z` | `9000`, `9001` | `9000`, `9001` |
