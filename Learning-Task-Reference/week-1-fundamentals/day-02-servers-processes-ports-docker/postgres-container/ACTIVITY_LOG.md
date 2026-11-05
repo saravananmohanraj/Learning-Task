@@ -48,3 +48,73 @@ docker run -d \
 
 9. agnohq/pgvector:18: Specifies the exact image and tag (version 18) to use as the blueprint for the container.
 
+Commands:
+
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ sh cookbook/scripts/run_pgvector.sh
+ccb44a53c3822b5bad49d94bb82de94132cf574aeb210b78852b4c85db764e1a
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ $ psql -h localhost -p 5532 -U ai -d ai
+bash: $: command not found
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ psql -h localhost -p 5532 -U ai -d ai
+bash: psql: command not found
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ ^C
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ docker exec -it pgvector psql -U ai -d ai
+psql (18.1 (Debian 18.1-1.pgdg12+2))
+Type "help" for help.
+
+ai=# CREATE DATABASE egpt_warehouse OWNER ai;
+CREATE DATABASE
+ai=# \c egpt_warehouse
+You are now connected to database "egpt_warehouse" as user "ai".
+egpt_warehouse=# CREATE TABLE documents (id SERIAL PRIMARY KEY, title VARCHAR(100), content TEXT);
+CREATE TABLE
+egpt_warehouse=# INSERT INTO documents (title, content) VALUES ('Doc 1', 'Testing Docker Postgres'), ('Doc 2', 'Testing pgvector persistence');
+INSERT 0 2
+egpt_warehouse=# SELECT * FROM documents;
+ id | title |           content
+----+-------+------------------------------
+  1 | Doc 1 | Testing Docker Postgres
+  2 | Doc 2 | Testing pgvector persistence
+(2 rows)
+
+egpt_warehouse=# \q
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ docker stop pgvector
+pgvector
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ docker start pgvector
+pgvector
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ docker exec -it pgvector psql -U ai -d egpt_warehouse -c "SELECT COUNT(*) FROM documents;"
+ count
+-------
+     2
+(1 row)
+
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ docker rm -f pgvector
+pgvector
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ sh cookbook/scripts/run_pgvector.sh
+42f8df4269586aaf5b900d09592dd58c7de580705c88b3bdbbf83a66330c4a84
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ sleep 5
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
+$ docker exec -it pgvector psql -U ai -d egpt_warehouse -c "SELECT COUNT(*) FROM documents;"
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "egpt_warehouse" does not exist
+(.venv)
