@@ -1,0 +1,7 @@
+cat << 'EOF' > sample.txt
+deploying spark cluster on aws
+writing python etl pipeline
+optimizing pyspark dataframe joins
+scheduling databricks jobs
+running spark streaming application
+EOF
