@@ -111,3 +111,7 @@ $ docker compose down
 
  -> Stops the containers and also destroys any named volumes attached to them, completely wiping the data.
 
+Test port conflicts:
+-> Windows machine only has one Port 5534 available. 
+-> Once db-one claims it, db-two crashes because the host port is already occupied, even though the internal container ports are isolated.
+

@@ -5,3 +5,10 @@ services:
       - POSTGRES_PASSWORD=secret
     ports:
       - "5533:5432"
+
+  my-test-db-check:
+    image: postgres:16
+    environment:
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5533:5432" 
