@@ -53,22 +53,17 @@ Commands:
 SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
 $ sh cookbook/scripts/run_pgvector.sh
 ccb44a53c3822b5bad49d94bb82de94132cf574aeb210b78852b4c85db764e1a
-(.venv)
-SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
-$ $ psql -h localhost -p 5532 -U ai -d ai
-bash: $: command not found
-(.venv)
-SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
-$ psql -h localhost -p 5532 -U ai -d ai
-bash: psql: command not found
-(.venv)
-SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
-$ ^C
+
 (.venv)
 SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
 $ docker exec -it pgvector psql -U ai -d ai
 psql (18.1 (Debian 18.1-1.pgdg12+2))
 Type "help" for help.
+
+Below are done using commands:
+1. Created the database named egpt_warehouse
+2. Created the table named documents
+3. Inserted the 2 rows
 
 ai=# CREATE DATABASE egpt_warehouse OWNER ai;
 CREATE DATABASE
@@ -116,5 +111,7 @@ $ sleep 5
 (.venv)
 SMS@DESKTOP-G2PRDKV MINGW64 /c/Saturam/saturam-agent-framework (main)
 $ docker exec -it pgvector psql -U ai -d egpt_warehouse -c "SELECT COUNT(*) FROM documents;"
-psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: FATAL:  database "egpt_warehouse" does not exist
-(.venv)
+ count
+-------
+     2
+(1 row)
