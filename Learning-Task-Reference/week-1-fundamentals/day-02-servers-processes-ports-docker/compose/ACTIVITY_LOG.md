@@ -115,3 +115,11 @@ Test port conflicts:
 -> Windows machine only has one Port 5534 available. 
 -> Once db-one claims it, db-two crashes because the host port is already occupied, even though the internal container ports are isolated.
 
+(.venv)
+SMS@DESKTOP-G2PRDKV MINGW64 ~/Downloads/Learning-Task-Reference/Learning-Task-Reference/week-1-fundamentals/day-02-servers-processes-ports-docker/compose (day-02-servers-processes-ports-docker)
+$ docker compose up -d
+[+] Running 2/3
+ ✔ Network compose_default               Created                                                                                                                       0.1s
+ ✔ Container compose-my-test-db-check-1  Started                                                                                                                       0.5s
+ - Container compose-my-test-db-1        Starting                                                                                                                      0.5s
+Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint compose-my-test-db-1 (6c46c2d2864cb8b7858bbc0d40fd3d66f13826b974e95b1df2fc3d3408296ebb): Bind for 0.0.0.0:5533 failed: port is already allocated
