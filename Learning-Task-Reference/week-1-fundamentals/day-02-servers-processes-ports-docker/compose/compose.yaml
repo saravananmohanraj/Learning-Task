@@ -1,0 +1,19 @@
+services:
+  my-test-db:
+    image: postgres:16
+    environment:
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5533:5432"
+
+# Below is for what if two services publish the same port?
+# It is not allowed to have two services publishing the same port on the host machine.
+# First, my-test-db is running and publishing port 5533 on the host machine. 
+# If you try to run my-test-db-check, it will fail because it also tries to publish port 5533 on the host machine, which is already in use by my-test-db.
+
+  # my-test-db-check:
+  #   image: postgres:16
+  #   environment:
+  #     - POSTGRES_PASSWORD=secret
+  #   ports:
+  #     - "5533:5432" 
